@@ -6,11 +6,16 @@ import { createStore } from 'redux'
 import todoApp from './reducers'
 import App from './components/App'
 
-let store = createStore(todoApp)
-console.log(store);
+import DevTools from './containers/DevTools';
+
+let store = createStore(todoApp, DevTools.instrument())
+
 render(
   <Provider store={store}>
-    <App />
+    <div>
+      <App />
+      <DevTools />
+    </div>
   </Provider>,
   document.getElementById('root')
 )
