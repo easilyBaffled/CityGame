@@ -11,8 +11,8 @@ const initialState = Immutable.fromJS({
 
 export default handleActions({
   START_NEXT_TURN(state, action) {
-    let currentPlayerId = state.get(currentPlayerId) + 1;
-    if (currentPlayerId === state.players.length) currentPlayerId = 0;
+    let currentPlayerId = state.get('currentPlayerId') + 1;
+    if (currentPlayerId === state.get('players').size) currentPlayerId = 0;    
     return state.set('currentPlayerId', currentPlayerId);
   }
 }, initialState);
