@@ -1,10 +1,13 @@
 import { combineReducers } from 'redux'
+import DevTools from '../containers/DevTools'
 import todos from './todos'
-import DevTools from '../containers/DevTools';
 import visibilityFilter from './visibilityFilter'
+import game from './game'
+
 
 const todoApp = combineReducers({
   todos,
+  game,
   visibilityFilter
 })
 
