@@ -1,20 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as GameActions from '../actions/game'
-
+import Board from '../components/Board'
 @connect(state => {
   return {
     currentPlayerID: state.game.get('currentPlayerId'),
     currentPlayer: state.game.get('players').toJS()[state.game.get('currentPlayerId')],
+    players: state.game.get('players').toJS(),
+    board: state.board.get('board').toJS(),
   }
 }, {
   ...GameActions
 })
 export default class Game extends Component {
   render() {
-    return <div style={{backgroundColor: this.props.currentPlayer.color}}>
-      {this.props.currentPlayer.id}
-      <button onClick={this.props.startNextTurn}>End Turn</button>
+    const {board, players, game, currentPlayer, startNextTurn} = this.props;
+    return <div style={{backgroundColor: currentPlayer.color}}>
+      {currentPlayer.id}
+      <button onClick={startNextTurn}>End Turn</button>
+      <Board board={board} players={players}/>
     </div>
   }
 }
