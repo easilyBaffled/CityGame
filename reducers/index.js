@@ -7,10 +7,8 @@ import board from './board'
 
 
 const todoApp = combineReducers({
-  todos,
   game,
   board,
-  visibilityFilter
 })
 
 export default todoApp

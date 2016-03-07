@@ -17,9 +17,9 @@ import Board from '../components/Board'
 export default class Game extends Component {
   render() {
     const {board, players, game, currentPlayer, currentPlayerID, startNextTurn, updateTileOwnerShip} = this.props;
-    return <div style={{backgroundColor: currentPlayer.color}}>
-      {currentPlayer.id}
-      <button onClick={startNextTurn}>End Turn</button>
+    return <div style={{border: `5px solid ${currentPlayer.color}`}}>
+      {currentPlayer.points}
+      <button onClick={() => { startNextTurn(board) }}>End Turn</button>
       <Board board={board} players={players} updateTileOwnerShip={updateTileOwnerShip} currentPlayerID={currentPlayerID}/>
     </div>
   }
