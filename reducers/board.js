@@ -12,13 +12,17 @@ const initialState = Immutable.fromJS({
 
 export default handleActions({
   UPDATE_TILE_OWNERSHIP(state, action) {
-    const board = state.get('board').toJS();
-    const tileStatus = board[action.tile.y][action.tile.x];
-    if(tileStatus === -1) {
-      board[action.tile.y][action.tile.x] = action.playerId;
-    } else {
-      board[action.tile.y][action.tile.x] = -1;
-    }
-    return state.set('board', board);
+    const { tile, playerId } = action.payload;
+    const board = state.get('board')
+    const row = board.get(tile.y);
+    const newRow = row.update(tile.x , tileStatus => {
+      if(tileStatus === -1) {
+        return playerId;
+      } else {
+        return  -1;
+      }
+    });
+    const newBoard = board.update(tile.y, () => newRow);
+    return state.set('board', newBoard);
   }
 }, initialState);

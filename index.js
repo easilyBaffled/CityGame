@@ -9,7 +9,6 @@ import App from './components/App'
 import DevTools from './containers/DevTools';
 
 let store = createStore(todoApp, DevTools.instrument())
-console.log(store.getState());
 render(
   <Provider store={store}>
     <div>
