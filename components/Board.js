@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import Board from '../components/Board'
+import Tile from './Tile'
 
-export default class Game extends Component {
+export default class Board extends Component {
   static propTypes = {
     board: PropTypes.array,
     players: PropTypes.array,
@@ -9,19 +9,19 @@ export default class Game extends Component {
   }
   render() {
     const { board, players, currentPlayerID } = this.props;
-    console.log(board)
     return (
       <div id='board'>
       {
         board.map((row, y) => {
           return <div key={y}> {
                   row.map((column, x) => {
-                    console.log(column, players)
                     let color = 'white'
                     if(column > -1) {
                       color = players[column].color
                     }
-                    return <div key={x} className='tile' style={{border:'1px solid black', height: '50', width: '50', display: 'inline-block', backgroundColor: color}} onClick={() => { this._updateTileOwnerShip(y, x, currentPlayerID)}}></div>
+                    return <div key={x} className='tile' style={{border:'3px solid darkgrey', display: 'inline-block', backgroundColor: color}} onClick={() => { this._updateTileOwnerShip(y, x, currentPlayerID)}}>
+                      <Tile />
+                    </div>
                   })}
                 </div>
         })
