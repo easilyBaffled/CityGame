@@ -1,28 +1,27 @@
 import Immutable from 'immutable';
 import {handleActions} from 'redux-actions'
-
+import _ from 'lodash';
 function generateBoard(height=5, width=5) {
-  return Array(height).fill().map(() => Array(width).fill(-1));
+  return Array(height).fill().map(() => Array(width).fill(generateTile()));
+}
+function generateTile() {
+  return {ownerId: -1, squareLayout: Array(3).fill().map(() => Array(3).fill(_.sample(0, 0, 0, -1)))}
 }
 
-
-const initialState = Immutable.fromJS({
+const initialState = {
   board: generateBoard()
-});
+};
 
 export default handleActions({
   UPDATE_TILE_OWNERSHIP(state, action) {
-    const { tile, playerId } = action.payload;
-    const board = state.get('board')
-    const row = board.get(tile.y);
-    const newRow = row.update(tile.x , tileStatus => {
-      if(tileStatus === -1) {
-        return playerId;
+    const { tilePosition, playerId } = action.payload;
+    const updatedState = _.update(state, `board[${tilePosition.y}][${tilePosition.x}]`, tile => {
+      if(tile.ownerId === -1) {
+        return {...tile, ownerId: playerId};
       } else {
-        return  -1;
+        return {...tile, ownerId: -1,};
       }
     });
-    const newBoard = board.update(tile.y, () => newRow);
-    return state.set('board', newBoard);
+    return Object.assign({}, updatedState);
   }
 }, initialState);
