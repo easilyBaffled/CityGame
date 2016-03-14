@@ -7,6 +7,7 @@ export default class Tile extends Component {
   }
   render() {
     const { boardPosition, squareLayout } = this.props;
+    console.log(squareLayout)
     return (<div> {
     squareLayout.map((row, y) => {
         return <div key={y}> {

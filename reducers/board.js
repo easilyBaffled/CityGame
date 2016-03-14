@@ -2,10 +2,10 @@ import Immutable from 'immutable';
 import {handleActions} from 'redux-actions'
 import _ from 'lodash';
 function generateBoard(height=5, width=5) {
-  return Array(height).fill().map(() => Array(width).fill(generateTile()));
+  return Array(height).fill().map(() => Array(width).fill().map(() => generateTile()));
 }
 function generateTile() {
-  return {ownerId: -1, squareLayout: Array(3).fill().map(() => Array(3).fill(_.sample(0, 0, 0, -1)))}
+  return {ownerId: -1, squareLayout: Array(3).fill().map(() => Array(3).fill().map(() => _.sample([0, 0, 0, 0, -1]))) };
 }
 
 const initialState = {

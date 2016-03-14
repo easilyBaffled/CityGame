@@ -16,12 +16,11 @@ export default class Board extends Component {
           return <div key={y}> {
                   row.map((tile, x) => {
                     let color = 'white'
-                    console.log(tile)
                     if(tile.ownerId > -1) {
                       color = players[tile.ownerId].color
                     }
                     return <div key={x} className='tile' style={{border:'3px solid darkgrey', display: 'inline-block', backgroundColor: color}} onClick={() => { this._updateTileOwnerShip(y, x, currentPlayerID)}}>
-                      <Tile squareLayout={tile.squareLayout} position={{x, y}}/>
+                      <Tile squareLayout={tile.squareLayout} boardPosition={{x, y}}/>
                     </div>
                   })}
                 </div>
