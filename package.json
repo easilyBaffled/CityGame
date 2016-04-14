@@ -20,6 +20,8 @@
     "babel-plugin-syntax-decorators": "^6.5.0",
     "babel-polyfill": "^6.3.14",
     "babel-preset-stage-0": "^6.5.0",
+    "eslint": "^2.7.0",
+    "eslint-config-airbnb": "^7.0.0",
     "immutable": "^3.7.6",
     "lodash": "^4.6.1",
     "react": "^0.14.7",
